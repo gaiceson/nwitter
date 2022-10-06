@@ -11,8 +11,13 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
-        setIsLoggedIn(user);
-        setUserObj(user);
+        //setIsLoggedIn(user); //--> 삭제
+        //setUserObj(user);
+        setUserObj({
+          uid: user.uid,
+          displayName: user.displayName,
+          updateProfile: (args) => user.updateProfile(args),
+        });
       } else {
         setIsLoggedIn(false);
       }
@@ -21,11 +26,20 @@ function App() {
     });
   }, []);
 
+  const refreshUser = () => {
+    //setUserObj(authService.currentUser); //--> 삭제
+    const user = authService.currentUser;
+    setUserObj({
+      uid: user.uid,
+      displayName: user.displayName,
+      updateProfile: (args) => user.updateProfile(args),
+    });
+  };
+
   return (
     <>
-    {init ? (<AppRouter isLoggin={isLoggin} userObj={userObj}/> 
+    {init ? (<AppRouter refreshUser={refreshUser} isLoggin={Boolean(userObj)} userObj={userObj}/> 
     ) : ( "initializing..." )}
-    <footer>&copy; {new Date().getFullYear()} Nwitter </footer>
     </>
   );
 }

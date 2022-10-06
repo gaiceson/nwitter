@@ -5,16 +5,16 @@ import Profile from 'routes/Profile';
 import Navigation from './Navigation';
 import {useHistory} from "react-router-dom";
 
-const AppRouter = ({ isLoggin, userObj }) => {
+const AppRouter = ({ isLoggin, userObj, refreshUser }) => {
   
     return (
         <Router>
-            {isLoggin && <Navigation /> /** 로그인 되었을때 항상 보여지도록*/} 
+            {isLoggin && <Navigation userObj={userObj}/> /** 로그인 되었을때 항상 보여지도록*/} 
             <Routes>
                 {isLoggin ? (
                     <>
                     <Route exact path="/" element={<Home userObj={userObj} /> } />
-                    <Route exact path="/profile" element={<Profile /> } />
+                    <Route exact path="/profile" element={<Profile refreshUser={refreshUser} userObj={userObj}/> } />
                     </>
                 ) : (
                     <>
