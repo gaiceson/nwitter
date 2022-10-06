@@ -1,3 +1,6 @@
+import { faCodepen, faCpanel, faPennyArcade, faPerbyte } from "@fortawesome/free-brands-svg-icons";
+import { faArrowAltCircleLeft, faBookmark, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService, storageService } from "fbase";
 import { useState } from "react";
 
@@ -35,12 +38,13 @@ const Nweet = ({ nweetObj, isOwner }) => {
     };
 
     return (
-        <div>
+        <div className="nweet" >
             {editing ? (
                 <>
-                <form onSubmit={onSubmit}>
-                    <input onChange={onChange} value={newNweet} required />
-                    <input type="submit" value="Update Nweet" />
+                <form onSubmit={onSubmit} className="container nweetEdit">
+                    <input onChange={onChange} value={newNweet} required 
+                    placeholder="Edit your nweet" autoFocus className="formInput"/>
+                    <input type="submit" value="Update Nweet" className="formBtn"/>
                 </form>
                 <button onClick={toggleEditing}>Cancel</button>
                 </>
@@ -51,10 +55,10 @@ const Nweet = ({ nweetObj, isOwner }) => {
                     <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
                 ) }
                 { isOwner && (
-                <>
-                <button onClick={onDeleteClick}>Delete Nweet</button>
-                <button onClick={toggleEditing}>Edit Nweet</button> 
-                </>)
+                <div className="nweet__actions">
+                <span onClick={onDeleteClick}><FontAwesomeIcon icon={faTrashAlt} /></span>
+                <span onClick={toggleEditing}><FontAwesomeIcon icon={faBookmark} /></span> 
+                </div>)
                 }
                 </>
             )}
