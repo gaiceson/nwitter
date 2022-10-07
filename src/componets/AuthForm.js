@@ -61,7 +61,8 @@ const AuthForm = () => {
                 placeholder="Password" 
                 required 
                 value={password} 
-                onChange={onChange} //--> 스타일적용을 위해 className추가
+                onChange={onChange}
+                className="authInput" //--> 스타일적용을 위해 className추가
                 />
             <input type="submit" value={newAccount?"Create Account" : "Log In"} className="authInput authSubmit"/>
             {error}
