@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 
 const Test = () => {
-    return (
-        <>
-        <h4>타이틀 3333</h4>
-        <div>Hello GitTest!!!222!zzzzzz</div>
-        </>
-
-    );
-}
+  var text = "따옴표";
+  return <div name="name">{text}</div>;
+};
 
 export default Test;
